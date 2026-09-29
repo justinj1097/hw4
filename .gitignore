@@ -1,0 +1,29 @@
+# Secrets: never commit the real .env (use .env.example)
+.env
+.env.*
+!.env.example
+backend/.session_secret
+
+# Local-only data pack: database and product images (see README "Get the data pack")
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+
+# Editors / OS / temp
+.DS_Store
+.vscode/
+.idea/
+*.json.tmp
+output/audit_trail.corrupt-*.json

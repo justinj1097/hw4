@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Campus Customs — live app check</title>
+<style>
+  :root { --navy: #00356b; --ink: #1d1d1d; --muted: #5f6368; --stone: #f6f2ea; --line: #e3ddd0; --ok: #1f7a4d; --bad: #a63a2c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: #fff; }
+  header { background: var(--navy); color: #fff; padding: 28px 0; }
+  .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  h1 { margin: 0 0 6px; font-size: 1.9rem; }
+  header p { margin: 0; opacity: .9; }
+  nav { margin-top: 14px; display: flex; gap: 14px; flex-wrap: wrap; }
+  nav a { color: #fff; font-weight: 600; }
+  section { padding: 34px 0; border-bottom: 1px solid var(--line); }
+  h2 { color: var(--navy); margin: 0 0 4px; font-size: 1.5rem; }
+  .verdict { display: inline-block; background: #e5f3ec; color: var(--ok); font-weight: 700; border-radius: 999px; padding: 2px 12px; font-size: .85rem; margin-bottom: 12px; }
+  .proves { background: var(--stone); border-left: 4px solid var(--navy); padding: 12px 16px; margin: 12px 0 18px; }
+  figure { margin: 0 0 18px; }
+  figure img { width: 100%; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.08); display: block; }
+  figure a { display: block; cursor: zoom-in; }
+  figcaption { color: var(--muted); font-size: .9rem; margin-top: 6px; }
+  .pair { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; align-items: start; }
+  .chat { background: var(--stone); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; font-size: .95rem; }
+  .chat p { margin: 0 0 8px; }
+  .checks { color: var(--ok); font-size: .85rem; }
+  table { border-collapse: collapse; margin: 8px 0 16px; font-size: .92rem; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+  th { background: #f3f6fa; }
+  table.db td { text-align: center; min-width: 48px; }
+  caption { caption-side: top; text-align: left; font-size: .85rem; color: var(--muted); padding-bottom: 4px; }
+  td.hl { outline: 2px solid var(--navy); outline-offset: -2px; font-weight: 700; }
+  td.zero { color: var(--bad); font-weight: 700; }
+  .summary td:last-child { color: var(--ok); font-weight: 700; }
+  code { font-size: .88em; background: #f1f1f1; padding: 1px 4px; border-radius: 3px; }
+  footer { padding: 26px 0 40px; color: var(--muted); font-size: .9rem; }
+  @media (max-width: 860px) { .pair { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Campus Customs — live app check</h1>
+    <p>Click any screenshot to open it full size. Tested against the running app: FastAPI backend (<code>uvicorn main:app --reload --port 8000</code>) and the React + Vite front end at http://localhost:5173, as a guest shopper in Chromium, 1440×900. Captured 2026-09-29 00:47:28.</p>
+    <nav><a href="#inventory">1. Inventory check</a><a href="#cards">2. Dynamic search cards</a><a href="#search">3. Instant search (Problem 9)</a><a href="#alternatives">Bonus: find_alternatives</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+<section>
+  <h2>Summary</h2>
+  <table class="summary">
+    <tr><th>Check</th><th>What was tested</th><th>Result</th></tr>
+    <tr><td>1</td><td>Chat reports price and stock by size for an item, matching the database</td><td>Pass</td></tr>
+    <tr><td>2</td><td>A category question makes product cards appear on the page, and a card opens its product page</td><td>Pass</td></tr>
+    <tr><td>3</td><td>Instant search suggestions (Problem 9 usability feature)</td><td>Pass</td></tr>
+    <tr><td>Bonus</td><td><code>find_alternatives</code> offers in-stock substitutes for a sold-out size (Problem 9)</td><td>Pass</td></tr>
+  </table>
+</section>
+
+<section id="inventory">
+  <h2>1. Chat checks the inventory level of an item</h2>
+  <span class="verdict">✓ Honest stock and price from the DB</span>
+  <div class="pair">
+    <figure><a href="app_check_images/inventory_page.png" target="_blank" title="Open full size"><img src="app_check_images/inventory_page.png" alt="Saybrook College Crewneck product page: $58, stock by size with L 2 left and XXL sold out" /></a>
+      <figcaption>The product page, drawn from the database: $58, L shows "2 left", and XXL is "Sold out".</figcaption></figure>
+    <figure><a href="app_check_images/inventory_chat.png" target="_blank" title="Open full size"><img src="app_check_images/inventory_chat.png" alt="Chat with Boola answering the price and stock question" /></a>
+      <figcaption>Asked on that page. "Asking about: Saybrook College Crewneck" shows the chat knew which item "this" meant.</figcaption></figure>
+  </div>
+  <div class="chat"><p><b>Shopper:</b> How much is this? Is it in stock in XXL, and how many are left in L?</p><p><b>Boola</b> (4.7 s): The Saybrook College Crewneck is $58. It’s sold out in XXL; it’s in stock in XS, S, M, L, and XL. There are 2 left in L.</p><p class="checks">✓ Checked the store database at 12:47 AM: live stock for Saybrook College Crewneck · price of Saybrook College Crewneck</p></div>
+  <table class="db"><caption>campus_customs.db · <code>saybrook-college-crewneck</code> · price $58</caption><tr><th>Size</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr><tr><th>Qty</th><td class="">15</td><td class="">15</td><td class="">15</td><td class="hl">2</td><td class="">15</td><td class="hl zero">0</td></tr></table>
+  <p class="proves"><b>What this proves:</b> Boola's answer, "$58, sold out in XXL, 2 left in L, in stock in XS, S, M, L, and XL", matches the database row by row. The green line underneath is written by the server from the lookups it actually ran (live stock and price), not by the model.</p>
+</section>
+
+<section id="cards">
+  <h2>2. Dynamic search-result cards after a category question</h2>
+  <span class="verdict">✓ Agent returns structured matches, and the page renders them as cards</span>
+  <figure><a href="app_check_images/hoodie_cards.png" target="_blank" title="Open full size"><img src="app_check_images/hoodie_cards.png" alt="Home page showing 'Hoodies we carry' product cards from the chat" /></a>
+    <figcaption>On the Home page, a guest asked "What hoodies do you have?". <b>Hoodies We Carry</b> appeared at the top of the page: "Showing 12 of 27 · click a card for sizes and details", each card with photo, name, hang-tag price, and in-stock sizes.</figcaption></figure>
+  <div class="chat"><p><b>Shopper:</b> What hoodies do you have?</p><p><b>Boola</b> (7.4 s): We have 27 hoodies. The cards show 12 options, including the Basic Hoodie Big Yale at $68, the Champion Full Zip Hood at $88, and the Brooks Brothers Double Knit Full Zip Hoodie Yale at $88. Click a card for details and sizes; use “See all” to browse the full hoodie collection.</p><p class="checks">✓ Checked the store database at 12:47 AM: searched Hoodies (27 matches)</p></div>
+  <p class="proves"><b>What this proves:</b> the agent searched the catalogue and returned structured picks, and the site rendered them as live product cards on the current page, with a "See all 27" link to <code>/products?category=Hoodies</code>. The "27" matches the database: 27 products are in the Hoodies category.</p>
+  <div class="pair">
+    <figure><a href="app_check_images/hoodie_cards_page.png" target="_blank" title="Open full size"><img src="app_check_images/hoodie_cards_page.png" alt="The same cards with the chat closed" /></a>
+      <figcaption>The same result with the chat closed: 12 cards across the page.</figcaption></figure>
+    <figure><a href="app_check_images/card_opens_product.png" target="_blank" title="Open full size"><img src="app_check_images/card_opens_product.png" alt="Product page opened by clicking a chat card" /></a>
+      <figcaption>Clicking the first card (<b>Basic Hoodie Big Yale</b>) opened <code>/products/basic-hoodie-big-yale</code>: a large image and full details, $68.</figcaption></figure>
+  </div>
+  <p class="proves"><b>What this proves:</b> cards the chat puts on the page still open the single-item page from Problem 3 (large image, description, price, stock by size).</p>
+</section>
+
+<section id="search">
+  <h2>3. Problem 9 usability feature: instant search suggestions</h2>
+  <span class="verdict">✓ Live suggestions while typing, with keyboard support</span>
+  <figure><a href="app_check_images/instant_search.png" target="_blank" title="Open full size"><img src="app_check_images/instant_search.png" alt="Header search dropdown showing three Yale Dad products" /></a>
+    <figcaption>Typing "dad" in the header showed live matches with photo, category, price, and stock, plus "See all 3 results for “dad” →" and "Ask the assistant". Two presses of ↓ highlighted <b>Yale Dad Hoodie</b>, and Enter opened <code>/products/yale-dad-hoodie</code>.</figcaption></figure>
+  <table>
+    <tr><th>Suggestion</th><th>Shown</th><th>Stock label</th><th>Database</th></tr>
+    <tr><td>Yale Dad Crewneck</td><td>Crewnecks · $58</td><td>In stock</td><td>$58 · sizes in stock: XS, S, XXL</td></tr><tr><td>Yale Dad Hoodie</td><td>Hoodies · $68</td><td>In stock</td><td>$68 · sizes in stock: XS, S, M, L, XL, XXL</td></tr><tr><td>Yale Dad T Shirt</td><td>T-Shirts · $32</td><td>In stock</td><td>$32 · sizes in stock: XS, S, M, L, XXL</td></tr>
+  </table>
+  <p class="proves"><b>What this proves:</b> shoppers can find a specific item in a few keystrokes, with prices and stock that match the database, and can use the keyboard throughout.</p>
+</section>
+
+<section id="alternatives">
+  <h2>Bonus (Problem 9): <code>find_alternatives</code> when a size is sold out</h2>
+  <span class="verdict">✓ Substitutes are really in stock in the requested size</span>
+  <figure><a href="app_check_images/alternatives.png" target="_blank" title="Open full size"><img src="app_check_images/alternatives.png" alt="Yale Dad T Shirt page with XL alternatives shown as cards" /></a>
+    <figcaption>On the Yale Dad T Shirt page, a guest asked "Do you have this in XL?". Boola said XL is sold out and put "XL alternatives" cards on the page, with the Yale Dad Hoodie first.</figcaption></figure>
+  <div class="chat"><p><b>Shopper:</b> Do you have this in XL?</p><p><b>Boola</b> (6.4 s): The Yale Dad T Shirt is sold out in XL. It’s in stock in XS, S, M, L, and XXL. The Yale Dad Hoodie is $68 and available in XL; I also found several $32 T-shirt alternatives in XL below.</p><p class="checks">✓ Checked the store database at 12:47 AM: live stock for Yale Dad T Shirt · in-stock alternatives in XL (6 found)</p></div>
+  <div class="pair">
+    <div><table class="db"><caption>campus_customs.db · <code>yale-dad-t-shirt</code> · price $32</caption><tr><th>Size</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr><tr><th>Qty</th><td class="">20</td><td class="">12</td><td class="">20</td><td class="">15</td><td class="hl zero">0</td><td class="">12</td></tr></table></div>
+    <table><caption>XL stock of every suggested alternative (campus_customs.db)</caption><tr><th>Alternative</th><th>XL qty</th></tr><tr><td>District Tri Blend T Shirt Vintage Shield</td><td>8</td></tr><tr><td>Grace Hopper Logo T Shirt</td><td>8</td></tr><tr><td>Morse Logo T Shirt</td><td>25</td></tr><tr><td>Track Field Left Chest T Shirt</td><td>8</td></tr><tr><td>Tri Blend Sports Baseball T Shirt</td><td>25</td></tr><tr><td>Yale Dad Hoodie</td><td>12</td></tr></table>
+  </div>
+  <p class="proves"><b>What this proves:</b> a sold-out size isn't a dead end. Every suggested substitute has XL in stock, which the tool checks in code, and the answer about the original item stays honest (XL = 0).</p>
+</section>
+</main>
+
+<footer class="wrap">
+  Screenshots and figures were captured by <code>scripts/capture_app_check.py</code> (Playwright), which drives the live site like a shopper and reads the same <code>data/campus_customs.db</code> for the comparison tables. Raw results: <a href="app_check_images/results.json">app_check_images/results.json</a>.
+</footer>
+</body>
+</html>

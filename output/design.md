@@ -1,0 +1,25 @@
+# Design: making it feel like the shop at 57 Broadway
+
+The goal: the site should feel like walking up to a real campus store, not a template. It should be warm, collegiate, and a little playful, while price and stock stay the clearest things on every screen.
+
+| What changed | Where to see it | Why it helps customers stay and buy |
+| --- | --- | --- |
+| **Type hierarchy.** Graduate, a varsity collegiate slab, for headlines, prices, and tags. Libre Caslon (italic serif) for small accents like "*Est. 1975*". Nunito Sans and Open Sans stay for body text and UI. | Every page heading, "Wear your Bulldog pride", the hero stats | Letterman-jacket lettering says "Yale merch" at a glance. The serif adds heritage, and plain sans keeps details easy to read. Three fonts, three clear jobs. |
+| **Color.** Official Yale Blue (`#00356b`), a warm Old Campus "stone" (`#f6f2ea`) for paper-like sections, and New Haven brick red only for signs. | Promise band, category tiles, chat background, hang tags | The stone breaks up stark white and feels like the shop's shelves. Keeping blue as the only strong color makes the buttons and prices stand out. |
+| **Storefront hero.** A navy-and-white striped awning with a scalloped edge over a lit **shop window** that rotates featured products every 4 s, with a swinging hang-tag price. It pauses on hover, and dots let you pick. | Home page | It recreates standing outside the store. The window shows real products with prices before any scrolling, and the tag links straight to the product. |
+| **Ticker.** The announcement bar scrolls "Officially licensed ★ Printed & stitched on Broadway ★ Returns within 30 days ★ Ships nationwide ★ Ask Boola…". It pauses on hover. | Top of every page | Trust points (licensed, returns, shipping) stay visible without taking up space. The motion draws the eye once, then stays out of the way. |
+| **Hang-tag prices.** Each price sits on a slightly tilted paper tag with a string hole. | Every product card, product page, window display, chat cards | Price is the first thing shoppers look for. A tag makes it both unmissable and on-theme. |
+| **Stock-by-size strip.** Every card shows `XS S M L XL XXL`: in-stock sizes are highlighted, and sold-out sizes are struck through. | Products grid, chat result cards, Saved page | Shoppers see whether their size exists before clicking, so fewer clicks end in disappointment. |
+| **Card motion.** Cards lift on hover, and grid cards rise into view as you scroll (CSS `animation-timeline`, no JavaScript). | Products, Home favorites | Browsing feels alive and responsive, which encourages scrolling further through the catalogue. |
+| **Product photo zoom.** Hovering the product image zooms 1.9× toward the pointer. A "Hover to zoom" hint fades once used. | Any product page | Shoppers can check the embroidery, crests, and print detail, the things people worry about when buying merch online. |
+| **Heart burst.** Saving an item pops the heart and sprays six little dots in Yale blue and coral. | ♡ on cards and product pages | A small reward for a high-intent action makes saving, and coming back to buy, more likely. |
+| **Boola the bulldog.** A Campus Customs mascot drawn entirely in HTML and CSS (no image file, per project rules): a fawn bulldog with an underbite and a Yale-blue collar with a "Y" tag. It blinks, it **sniffs** while the agent works ("🐾 *Sniffing around the stockroom…*"), and it wags its ears when an answer arrives or when you hover the launcher. | The "Ask Boola" launcher, the chat header, a small avatar next to every answer | The chat becomes a character shoppers want to talk to, not a generic bot. Showing the wait as sniffing makes the few seconds of lookup feel intentional. The agent's prompt was updated so it knows it's Boola, with a light bulldog touch. |
+| **Chat feel.** A pennant-striped header, a warm dotted "notepad" background, answers as white note cards, messages that slide in, and the chat opening from the corner. | Chat panel | It feels like talking to the store, and the product cards and "✓ checked the database" notes from earlier problems sit clearly under each answer. |
+| **Page transitions.** A 0.28 s fade and rise between pages. | Any navigation | Moving between pages feels smooth, like one store rather than separate pages. |
+
+**Guardrails:**
+- **Reduced motion:** every animation (ticker, window rotation, card reveal, Boola, bursts, transitions) is turned off when the shopper's system asks for reduced motion.
+- **Accessibility:** the ticker has a plain-text label for screen readers.
+- **Honest content:** the hero's stats are true (102 styles, XS–XXL, 30-day returns). I removed a draft "12 residential colleges" line, because Yale has 14 and the store data doesn't back the number.
+
+**A bug found during the design check:** searching "Saybrook College" made the agent say "we have 96 Saybrook items", because the search matched *any* word. Multi-word searches now require every word ("Saybrook College" returns 3). When nothing matches every word, results are flagged as "closest matches" and the agent won't quote a total. This is covered by a new test (21 passing).

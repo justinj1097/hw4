@@ -1,0 +1,184 @@
+{
+  "site": "http://localhost:5173",
+  "captured_at": "2026-09-29 00:47:28",
+  "inventory": {
+    "question": "How much is this? Is it in stock in XXL, and how many are left in L?",
+    "seconds": 4.7,
+    "reply": "The Saybrook College Crewneck is $58. It’s sold out in XXL; it’s in stock in XS, S, M, L, and XL. There are 2 left in L.",
+    "checks": "✓ Checked the store database at 12:47 AM: live stock for Saybrook College Crewneck · price of Saybrook College Crewneck",
+    "chat_cards": [
+      "Saybrook College Crewneck"
+    ],
+    "page_sizes": [
+      "XS\nIn stock",
+      "S\nIn stock",
+      "M\nIn stock",
+      "L\n2 left",
+      "XL\nIn stock",
+      "XXL\nSold out"
+    ],
+    "database": {
+      "product_id": "saybrook-college-crewneck",
+      "name": "Saybrook College Crewneck",
+      "price": 58.0,
+      "inventory": {
+        "XS": 15,
+        "S": 15,
+        "M": 15,
+        "L": 2,
+        "XL": 15,
+        "XXL": 0
+      }
+    }
+  },
+  "cards": {
+    "question": "What hoodies do you have?",
+    "seconds": 7.4,
+    "reply": "We have 27 hoodies. The cards show 12 options, including the Basic Hoodie Big Yale at $68, the Champion Full Zip Hood at $88, and the Brooks Brothers Double Knit Full Zip Hoodie Yale at $88. Click a card for details and sizes; use “See all” to browse the full hoodie collection.",
+    "checks": "✓ Checked the store database at 12:47 AM: searched Hoodies (27 matches)",
+    "chat_cards": [
+      "Basic Hoodie Big Yale",
+      "Brooks Brothers Double Knit Full Zip Hoodie Yale",
+      "Champion Full Zip Hood",
+      "Champion Reverse Weave Hoodie 1"
+    ],
+    "page": "http://localhost:5173/",
+    "title": "HOODIES WE CARRY",
+    "meta": "Showing 12 of 27 · click a card for sizes and details",
+    "cards": [
+      "Basic Hoodie Big Yale",
+      "Brooks Brothers Double Knit Full Zip Hoodie Yale",
+      "Champion Full Zip Hood",
+      "Champion Reverse Weave Hoodie 1",
+      "Crew Left Chest Hoodie",
+      "District Vit Hoodie Vintage Bulldog",
+      "District Vit Hoodie Vintage Sailor Bulldog",
+      "Fencing Left Chest Hoodie",
+      "Ice Hockey Left Chest Hoodie",
+      "Sailing Left Chest Hoodie",
+      "Squash Left Chest Hoodie",
+      "The Forest School Hoodie"
+    ],
+    "prices": [
+      "$68",
+      "$88",
+      "$88",
+      "$68",
+      "$68",
+      "$68",
+      "$68",
+      "$68",
+      "$68",
+      "$68",
+      "$68",
+      "$68"
+    ],
+    "see_all": "/products?category=Hoodies",
+    "clicked_card": "Basic Hoodie Big Yale",
+    "opened": {
+      "url": "http://localhost:5173/products/basic-hoodie-big-yale",
+      "h1": "BASIC HOODIE BIG YALE",
+      "price": "$68"
+    },
+    "database_hoodie_count": 27
+  },
+  "search": {
+    "typed": "dad",
+    "suggestions": [
+      "Yale Dad Crewneck\nCrewnecks · $58\nIn stock",
+      "Yale Dad Hoodie\nHoodies · $68\nIn stock",
+      "Yale Dad T Shirt\nT-Shirts · $32\nIn stock"
+    ],
+    "actions": [
+      "See all 3 results for “dad” →",
+      "💬 Ask the assistant about “dad”"
+    ],
+    "highlighted": "Yale Dad Hoodie",
+    "database": [
+      {
+        "product_id": "yale-dad-crewneck",
+        "name": "Yale Dad Crewneck",
+        "price": 58.0,
+        "inventory": {
+          "XS": 15,
+          "S": 8,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "XXL": 15
+        }
+      },
+      {
+        "product_id": "yale-dad-hoodie",
+        "name": "Yale Dad Hoodie",
+        "price": 68.0,
+        "inventory": {
+          "XS": 5,
+          "S": 5,
+          "M": 12,
+          "L": 20,
+          "XL": 12,
+          "XXL": 15
+        }
+      },
+      {
+        "product_id": "yale-dad-t-shirt",
+        "name": "Yale Dad T Shirt",
+        "price": 32.0,
+        "inventory": {
+          "XS": 20,
+          "S": 12,
+          "M": 20,
+          "L": 15,
+          "XL": 0,
+          "XXL": 12
+        }
+      }
+    ],
+    "enter_opened": {
+      "url": "http://localhost:5173/products/yale-dad-hoodie",
+      "h1": "YALE DAD HOODIE"
+    }
+  },
+  "alternatives": {
+    "question": "Do you have this in XL?",
+    "seconds": 6.4,
+    "reply": "The Yale Dad T Shirt is sold out in XL. It’s in stock in XS, S, M, L, and XXL. The Yale Dad Hoodie is $68 and available in XL; I also found several $32 T-shirt alternatives in XL below.",
+    "checks": "✓ Checked the store database at 12:47 AM: live stock for Yale Dad T Shirt · in-stock alternatives in XL (6 found)",
+    "chat_cards": [
+      "Yale Dad Hoodie",
+      "Tri Blend Sports Baseball T Shirt",
+      "District Tri Blend T Shirt Vintage Shield",
+      "Grace Hopper Logo T Shirt"
+    ],
+    "inline_cards": [
+      "Yale Dad Hoodie",
+      "Tri Blend Sports Baseball T Shirt",
+      "District Tri Blend T Shirt Vintage Shield",
+      "Grace Hopper Logo T Shirt",
+      "Morse Logo T Shirt",
+      "Track Field Left Chest T Shirt"
+    ],
+    "database": {
+      "product_id": "yale-dad-t-shirt",
+      "name": "Yale Dad T Shirt",
+      "price": 32.0,
+      "inventory": {
+        "XS": 20,
+        "S": 12,
+        "M": 20,
+        "L": 15,
+        "XL": 0,
+        "XXL": 12
+      }
+    },
+    "alternatives_xl_stock": {
+      "District Tri Blend T Shirt Vintage Shield": 8,
+      "Grace Hopper Logo T Shirt": 8,
+      "Morse Logo T Shirt": 25,
+      "Track Field Left Chest T Shirt": 8,
+      "Tri Blend Sports Baseball T Shirt": 25,
+      "Yale Dad Hoodie": 12
+    }
+  }
+}
